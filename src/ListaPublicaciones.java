@@ -17,5 +17,26 @@ public class ListaPublicaciones {
 		return miListaPublicaciones;
 	}
 	
+	private Iterator<Publicación> getIterador() {
+		return lista.iterator();
+	}
+	
+	public Publicación buscarPubliPorId(String pId) {
+		boolean enc = false;
+		Iterator<Publicación> itr = getIterador();
+		Publicación p =null;
+		while (!enc && itr.hasNext()) {
+			p = itr.next();
+			if (p.tieneMismoId(pId)) {
+				enc = true;
+			}
+		}
+		return p;
+	}
+	
+	public void anadirPublicación(String pId, String pTítulo) {
+		Publicación p = new Publicación(pId, pTítulo);
+		this.lista.add(p);
+	}
 	
 }
