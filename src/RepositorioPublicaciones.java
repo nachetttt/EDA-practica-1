@@ -1,5 +1,7 @@
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -111,5 +113,48 @@ public class RepositorioPublicaciones {
 		//TODO hacer este metodo
 		ArrayList<String> al = new ArrayList<String>();
 		return al;
+	}
+	
+	public void loadCitas(String nom) {
+		try {
+			PrintWriter salida = new PrintWriter(new File(nom));
+			for (String pId: citas.keySet()) {
+				for (String pCita: citas.get(pId)) {
+					salida.println(pId+" # "+pCita);
+				}
+			}
+			salida.flush();
+			salida.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadAutores(String nom) {
+		try {
+			PrintWriter salida = new PrintWriter(new File(nom));
+			for (String pId: autores.keySet()) {
+				for (String pAutor: autores.get(pId)) {
+					salida.println(pId+" # "+pAutor);
+				}
+			}
+			salida.flush();
+			salida.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadPublicaciones(String nom) {
+		try {
+			PrintWriter salida = new PrintWriter(new File(nom));
+			for (String pId: publicaciones.keySet()) {
+				salida.println(pId+" # "+publicaciones.get(pId).getTítulo());
+			}
+			salida.flush();
+			salida.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

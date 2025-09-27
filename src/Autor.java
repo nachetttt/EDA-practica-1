@@ -3,12 +3,28 @@ public class Autor {
 	
 	private String id;
 	private String nombre;
-	private RepositorioPublicaciones lista;
-		//como puede tener una lista de publicaciones si es una mae?
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public Autor(String pId, String pNombre) {
 		
 		this.id = pId;
 		this.nombre = pNombre;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

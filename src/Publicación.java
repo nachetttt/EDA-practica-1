@@ -11,13 +11,30 @@ public class Publicación {
 		this.título = pNombre;
 
 	}
-	
-	public boolean tieneMismoId(String pId) {
-		//se puede hacer directamente contans(pId)?
-		boolean tiene = false;
-		if (this.id==pId) {
-			tiene = true;
-		}
-		return tiene;
+
+	public String getId() {
+		return id;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTítulo() {
+		return título;
+	}
+
+	public void setTítulo(String título) {
+		this.título = título;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+	
+	
 }
