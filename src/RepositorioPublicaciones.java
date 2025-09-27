@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class RepositorioPublicaciones {
 	
 	private HashMap<String, ArrayList<String>> citas; //ID Publicación # Publi citada
-	private HashMap<String, Publicación> publicaciones; //ID Publicación # Objeto Publicación
+	private HashMap<String, Publicacion> publicaciones; //ID Publicación # Objeto Publicación
 	private HashMap<String, ArrayList<String>> autores; //ID publicación # Autores que la han realizado 
 	
 	private RepositorioPublicaciones() {
@@ -62,7 +62,7 @@ public class RepositorioPublicaciones {
 			while(entrada.hasNextLine()) {
 				linea = entrada.nextLine();
 				String[] datos = linea.split(" # ");
-				Publicación publi = new Publicación(datos[0], datos[1]);
+				Publicacion publi = new Publicacion(datos[0], datos[1]);
 				publicaciones.put(datos[0], publi);
 			}
 			entrada.close();
@@ -71,13 +71,13 @@ public class RepositorioPublicaciones {
 		}
 	}
 	
-	public Publicación buscarPubliPorId(String pId) {
-		Publicación publi = publicaciones.get(pId);
+	public Publicacion buscarPubliPorId(String pId) {
+		Publicacion publi = publicaciones.get(pId);
 		return publi;
 	}
 	
 	public void anadirPubli(String pId, String pTítulo) {
-		Publicación publi = new Publicación(pId, pTítulo);
+		Publicacion publi = new Publicacion(pId, pTítulo);
 		publicaciones.put(pId, publi);
 	}
 	
@@ -99,20 +99,33 @@ public class RepositorioPublicaciones {
 		publicaciones.remove(pIdPubli);
 	}
 	
-	public ArrayList<Publicación> listaPublisCitadas(String pId) {
-		ArrayList<Publicación> lPC = new ArrayList<>();
+	public ArrayList<Publicacion> listaPublisCitadas(String pId) {
+		ArrayList<Publicacion> lPC = new ArrayList<>();
 		ArrayList<String> lista = citas.get(pId);
 		for (String i: lista) {
-			Publicación publi = publicaciones.get(i);
+			Publicacion publi = publicaciones.get(i);
 			lPC.add(publi);
 		}
 		return lPC;
 	}
 	
-	public ArrayList<String> listaAutores(Publicación p) {
-		//TODO hacer este metodo
+	public ArrayList<String> listaAutoresPubli(Publicacion p) {
+		//TODO hacer este metodo en el que dada una publicación devuelve una lista con sus autores.
 		ArrayList<String> al = new ArrayList<String>();
 		return al;
+	}
+	
+	public ArrayList<Publicacion> listaPublicacionesAutor(Autor a){
+		ArrayList<Publicacion> lista = new ArrayList<>();
+		//TODO hacer este metodo en el que dado un autor devuelve una lista con las publicaciones realizadas.
+		return lista;
+	}
+	
+	
+	public ArrayList<String> ordenarAlfabeticamente(){
+		ArrayList<String> lista = new ArrayList<>();
+		//TODO Hacer este método en el que se ordena alfabeticamente con algoritmo de ordenación.
+		return lista;
 	}
 	
 	public void loadCitas(String nom) {
