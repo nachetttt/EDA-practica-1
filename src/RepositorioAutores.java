@@ -1,21 +1,24 @@
+package labo1;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class ListaAutores {
-	private ArrayList<Autor> lista;
+public class RepositorioAutores {
+	private HashMap<String, Autor> autores; //ID autor # Objeto Autor
 	
-	public ListaAutores() {
-		lista = new ArrayList<>();
+	public RepositorioAutores() {
+		autores = new HashMap<>();
 	}
 	
 	public void anadirAutor(String pId, String pNom) {
 		Autor a = new Autor(pId,pNom);
-		this.lista.add(a);
+		this.autores.put(pId, a);
 	}
 	
 	public void readAutores(String nom) {
@@ -26,51 +29,26 @@ public class ListaAutores {
 				linea = entrada.nextLine();
 				String[] datos = linea.split(" # ");
 				Autor a = new Autor(datos[0],datos[1]);
-				lista.add(a);
+				autores.put(datos[0], a);
 			}
 			entrada.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	private Iterator<Autor> getIterador() {
-		return lista.iterator();
-	}
 	
-	public int obtenerInd(String pId) {
-		int ind = 0;
-		boolean enc = false;
-		Autor a = null;
-		Iterator<Autor> itr = getIterador();
-		
-		while (!enc && itr.hasNext()) {
-			a = itr.next();
-			if (a.getId().equals(pId)) {
-				enc = true;
-			}else {
-				ind++;
-			}
-		}
-		
-		if (enc) {
-			return ind;
-		}else {
-			return -1;
-		}
+	public Autor obtenerAutor(String pId) {
+		return autores.get(pId);
 	}
 	
 	public void eliminarAutor(String pId) {
-		int ind = obtenerInd(pId);
-		if (ind!=-1) {
-			lista.remove(ind);
-		}
+		autores.remove(pId);
 	}
 	
 	public void loadAutores(String nom) {
 		try {
 			PrintWriter salida = new PrintWriter(new File(nom));
-			for (Autor a: lista) { 
+			for (Autor a: autores.values()) { 
 				salida.println(a.getId()+" # "+a.getNombre());
 			}
 			salida.flush();
