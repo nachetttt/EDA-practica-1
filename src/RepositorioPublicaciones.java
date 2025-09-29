@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
 public class RepositorioPublicaciones {
 	
 	private HashMap<String, ArrayList<String>> citas; //ID Publicación # Publi citada
@@ -88,11 +87,11 @@ public class RepositorioPublicaciones {
 		citas.get(pId).add(pCita);
 	}
 	
-	public void anadirAutorAPubli(String pIdPubli, String pNom) {
+	public void anadirAutorAPubli(String pIdPubli, String pIdAutor) {
 		if (!autores.containsKey(pIdPubli)) {
 			autores.put(pIdPubli, new ArrayList<>());
 		}
-		autores.get(pIdPubli).add(pNom);
+		autores.get(pIdPubli).add(pIdAutor);
 	}
 	
 	public void eliminarPubli(String pIdPubli) {
@@ -110,14 +109,18 @@ public class RepositorioPublicaciones {
 	}
 	
 	public ArrayList<String> listaAutoresPubli(Publicacion p) {
-		//TODO hacer este metodo en el que dada una publicación devuelve una lista con sus autores.
-		ArrayList<String> al = new ArrayList<String>();
-		return al;
+		ArrayList<String> lA = autores.get(p.getId());
+		return lA;
 	}
 	
 	public ArrayList<Publicacion> listaPublicacionesAutor(Autor a){
 		ArrayList<Publicacion> lista = new ArrayList<>();
-		//TODO hacer este metodo en el que dado un autor devuelve una lista con las publicaciones realizadas.
+		for(String pIdPubli: autores.keySet()) {
+			ArrayList<String> lA = autores.get(pIdPubli);
+			if(lA.contains(a.getId())){
+				lista.add(publicaciones.get(pIdPubli));
+			}
+		}
 		return lista;
 	}
 	
@@ -162,7 +165,7 @@ public class RepositorioPublicaciones {
 		try {
 			PrintWriter salida = new PrintWriter(new File(nom));
 			for (String pId: publicaciones.keySet()) {
-				salida.println(pId+" # "+publicaciones.get(pId).getTítulo());
+				salida.println(pId+" # "+publicaciones.get(pId).getTitulo());
 			}
 			salida.flush();
 			salida.close();
