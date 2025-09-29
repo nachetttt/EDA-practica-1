@@ -1,4 +1,3 @@
-
 public class Autor {
 	
 	private String id;
@@ -26,5 +25,4 @@ public class Autor {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 }
