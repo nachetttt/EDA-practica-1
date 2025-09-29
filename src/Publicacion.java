@@ -1,14 +1,13 @@
-
 public class Publicacion {
 	
 	private String id;
-	private String título;
+	private String titulo;
 	private Autor autor;
 	
 	public Publicacion(String pId, String pNombre) {
 	
 		this.id = pId;
-		this.título = pNombre;
+		this.titulo = pNombre;
 
 	}
 
@@ -20,12 +19,12 @@ public class Publicacion {
 		this.id = id;
 	}
 
-	public String getTítulo() {
-		return título;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setTítulo(String título) {
-		this.título = título;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public Autor getAutor() {
@@ -35,6 +34,4 @@ public class Publicacion {
 	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
-	
-	
 }
