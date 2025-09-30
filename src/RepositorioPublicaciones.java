@@ -125,9 +125,34 @@ public class RepositorioPublicaciones {
 	}
 	
 	
-	public ArrayList<String> ordenarAlfabeticamente(){
-		ArrayList<String> lista = new ArrayList<>();
-		//TODO Hacer este método en el que se ordena alfabeticamente con algoritmo de ordenación.
+	public ArrayList<Publicacion> ordenarAlfabeticamente(){
+		ArrayList<Publicacion> lista = new ArrayList<>();
+		for(Publicacion publi: publicaciones.values()) {
+			if(lista.size()==0) {
+				lista.add(publi);
+			} else {
+				int posInicial=0, posFinal=lista.size()-1, posMitad=0;
+				boolean enc=false;
+				while(posInicial<=posFinal && !enc) {
+					posMitad = (posInicial+posFinal)/2;
+					Publicacion p = lista.get(posMitad);
+					if(p.getId().compareTo(publi.getId())<0) {
+						posInicial = posMitad + 1;
+					}else {
+						if(posMitad==0 || lista.get(posMitad - 1).getId().compareTo(publi.getId())<0) {
+							enc = true;
+						}else {
+							posFinal = posMitad - 1;
+						}
+					}
+				}
+				if(!enc) {
+					lista.add(publi);
+				}else {
+					lista.add(posMitad,publi);
+				}
+			}
+		}
 		return lista;
 	}
 	
