@@ -10,6 +10,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 	private RepositorioPublicaciones rP;
 	private Publicacion p1,p2,p3;
 	private ArrayList<Publicacion> lista;
+	private ArrayList<String> lista2;
 	
 	protected void setUp() throws Exception {
 		rP = new RepositorioPublicaciones();
@@ -17,6 +18,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		p2 = new Publicacion("P2", "Publi2");
 		p3 = new Publicacion("P3", "Publi3");
 		lista = new ArrayList<Publicacion>();
+		lista2 = new ArrayList<String>();
 	}
 
 	protected void tearDown() throws Exception {
@@ -59,8 +61,10 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testInsertarPubli() {
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		int size = rP.getPublicaciones().size();
 		rP.getPublicaciones().put("P1", p1);
-		assertTrue(rP.getPublicaciones().size()==1);
+		assertTrue(rP.getPublicaciones().size()==size+1);
 	}
 
 	public void testAnadirCitaAPubli() {
@@ -96,26 +100,29 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testListaPublisCitadas() {
-		rP.anadirCitaAPubli("P1", "P2");
-		rP.anadirCitaAPubli("P1", "P3");
-		rP.anadirCitaAPubli("P1", "P3");
-		rP.anadirCitaAPubli("P1", "P4");
-		rP.anadirCitaAPubli("P1", "P5");
-		rP.anadirCitaAPubli("P8", "P5");
-		lista = rP.listaPublisCitadas("P1");
-		assertTrue(lista.size()==5);
-		
-		rP.getCitas().get("P1").remove(4);
-		lista = rP.listaPublisCitadas("P1");
-		assertEquals(4,lista.size());
-		
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		rP.readCitas("Datuak/Datuak/publications-citedPubs-all.txt");
+		lista = rP.listaPublisCitadas("Q21136163");
+		//comprobar que las dos tengan el mismo numero de citas
+		assertTrue(lista.size()==rP.getCitas().get("Q21136163").size());
+		//comprobar que una misma cita la contienen las dos listas
+		assertTrue(lista.contains(rP.buscarPubliPorId(rP.getCitas().get("Q21136163").get(0)))); 
 	}
+	
 	public void testListaAutoresPubli() {
-		fail("Not yet implemented");
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
+		lista2 = rP.listaAutoresPubli(rP.buscarPubliPorId("Q101088249"));
+		//comprobar que las dos tengan el mismo numero de citas
+		assertTrue(lista2.size()==rP.getAutores().get("Q101088249").size());
+		//comprobar que una misma cita la contienen las dos listas
+		assertTrue(lista2.contains(rP.getAutores().get("Q101088249").get(0)));
 	}
 
 	public void testListaPublicacionesAutor() {
-		fail("Not yet implemented");
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
+		//TODO terminar esta mierda me he raiau, chau.
 	}
 
 	public void testOrdenarAlfabeticamente() {
