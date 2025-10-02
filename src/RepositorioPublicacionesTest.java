@@ -54,11 +54,25 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testAnadirCitaAPubli() {
-		fail("Not yet implemented");
+		rP.readCitas("Datuak/Datuak/publications-citedPubs-all.txt");
+		//publicacion con  citas. (tiene ya 41 citas)
+		rP.anadirCitaAPubli("Q21136163", "Q21562621");
+		assertEquals("Q21562621",rP.getCitas().get("Q21136163").get(41));
+		//publicacion sin citas.
+		rP.anadirCitaAPubli(p1.getId(),"Q21562621");
+		assertTrue(rP.getCitas().containsKey(p1.getId()));
+		assertEquals("Q21562621",rP.getCitas().get(p1.getId()).get(0));
 	}
 
 	public void testAnadirAutorAPubli() {
-		fail("Not yet implemented");
+		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
+		//publicacion con autores.
+		rP.anadirAutorAPubli("Q101088249","Q448592");
+		assertEquals("Q448592",rP.getAutores().get("Q101088249").get(2));
+		//nueva publicacion sin autores.
+		rP.anadirAutorAPubli(p1.getId(), "Q448592");
+		assertTrue(rP.getAutores().containsKey(p1.getId()));
+		assertEquals("Q448592",rP.getAutores().get(p1.getId()).get(0));
 	}
 
 	public void testEliminarPubli() {
