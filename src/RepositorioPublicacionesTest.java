@@ -1,3 +1,6 @@
+
+package labo1;
+
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
@@ -71,8 +74,9 @@ public class RepositorioPublicacionesTest extends TestCase {
 	public void testAnadirCitaAPubli() {
 		rP.readCitas("Datuak/Datuak/publications-citedPubs-all.txt");
 		//publicacion con  citas. (tiene ya 41 citas)
+		int size = rP.getCitas().get("Q21136163").size();
 		rP.anadirCitaAPubli("Q21136163", "Q21562621");
-		assertEquals("Q21562621",rP.getCitas().get("Q21136163").get(41));
+		assertEquals("Q21562621",rP.getCitas().get("Q21136163").get(size));
 		//publicacion sin citas.
 		rP.anadirCitaAPubli(p1.getId(),"Q21562621");
 		assertTrue(rP.getCitas().containsKey(p1.getId()));
@@ -82,6 +86,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 	public void testAnadirAutorAPubli() {
 		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
 		//publicacion con autores.
+		int size = rP.getAutores().size();
 		rP.anadirAutorAPubli("Q101088249","Q448592");
 		assertEquals("Q448592",rP.getAutores().get("Q101088249").get(2));
 		//nueva publicacion sin autores.
@@ -91,12 +96,11 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testEliminarPubli() {
-		rP.getPublicaciones().put("P1", p1);
-		rP.getPublicaciones().put("P2", p2);
-		assertTrue(rP.getPublicaciones().size()==2);	
-		rP.eliminarPubli("P2");
-		assertFalse(rP.getPublicaciones().containsKey("P2"));
-		assertTrue(rP.getPublicaciones().size()==1);
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		int size = rP.getPublicaciones().size();
+		rP.eliminarPubli("Q33205611");
+		assertFalse(rP.getPublicaciones().containsKey("Q33205611"));
+		assertEquals((size-1),rP.getPublicaciones().size());
 	}
 
 	public void testListaPublisCitadas() {
