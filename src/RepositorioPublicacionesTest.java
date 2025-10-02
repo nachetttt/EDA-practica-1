@@ -115,7 +115,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		
 	}
 	public void testListaAutoresPubli() {
-		
+		fail("Not yet implemented");
 	}
 
 	public void testListaPublicacionesAutor() {
@@ -123,19 +123,8 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testOrdenarAlfabeticamente() {
-		fail("Not yet implemented");
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		ArrayList<Publicacion> lista = rP.ordenarAlfabeticamente();
+		assertTrue(lista.get(0).getId().compareTo(lista.get(1).getId())<0);
 	}
-
-	public void testLoadCitas() {
-		fail("Not yet implemented");
-	}
-
-	public void testLoadAutores() {
-		fail("Not yet implemented");
-	}
-
-	public void testLoadPublicaciones() {
-		fail("Not yet implemented");
-	}
-
 }
