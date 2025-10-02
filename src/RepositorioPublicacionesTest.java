@@ -21,15 +21,30 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testReadCitas() {
-		//TODO hacer este test llamando a read.citas
+		rP.readCitas("Datuak/Datuak/publications-citedPubs-all.txt");
+		assertTrue(rP.getCitas().size()!=0);
+		//Comprobar que la primera publicacion del archivo existe,
+		//con su respectiva cita.
+		assertTrue(rP.getCitas().containsKey("Q21136163"));
+		assertEquals("Q24600704",rP.getCitas().get("Q21136163").get(0));
 	}
 
 	public void testReadAutores() {
-		//TODO hacer este test
+		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
+		assertTrue(rP.getAutores().size()!=0);
+		//Comprobar que la primera publicacion del archivo existe,
+		//con su respectivo autor.
+		assertTrue(rP.getAutores().containsKey("Q101088249"));
+		assertEquals("Q333959",rP.getAutores().get("Q101088249").get(0));
 	}
 
 	public void testReadPublicaciones() {
-		//TODO hacer este test
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		assertTrue(rP.getPublicaciones().size()!=0);
+		//Comprobar que la primera publicacion del archivo existe,
+		//con su respectivo titulo.
+		assertTrue(rP.getPublicaciones().containsKey("Q33205611"));
+		assertEquals("Towards two-dimensional electrophoresis mapping of the cerebrospinal fluid proteome from a single individual", rP.getPublicaciones().get("Q33205611").getTitulo());
 	}
 
 	public void testBuscarPubliPorId() {
