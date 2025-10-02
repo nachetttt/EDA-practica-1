@@ -13,7 +13,7 @@ public class RepositorioPublicaciones {
 	private HashMap<String, Publicacion> publicaciones; //ID Publicación # Objeto Publicación
 	private HashMap<String, ArrayList<String>> autores; //ID publicación # Autores que la han realizado 
 	
-	private RepositorioPublicaciones() {
+	public RepositorioPublicaciones() {
 		citas = new HashMap<>();
 		publicaciones = new HashMap<>();
 		autores = new HashMap<>();
@@ -76,7 +76,7 @@ public class RepositorioPublicaciones {
 		return publi;
 	}
 	
-	public void anadirPubli(String pId, String pTítulo) {
+	public void insertarPubli(String pId, String pTítulo) {
 		Publicacion publi = new Publicacion(pId, pTítulo);
 		publicaciones.put(pId, publi);
 	}
@@ -110,24 +110,62 @@ public class RepositorioPublicaciones {
 	}
 	
 	public ArrayList<String> listaAutoresPubli(Publicacion p) {
-		//TODO hacer este metodo en el que dada una publicación devuelve una lista con sus autores.
-		ArrayList<String> al = new ArrayList<String>();
+		String pId = p.getId();
+		ArrayList<String> al = autores.get(pId);
+		
 		return al;
 	}
 	
 	public ArrayList<Publicacion> listaPublicacionesAutor(Autor a){
 		ArrayList<Publicacion> lista = new ArrayList<>();
-		//TODO hacer este metodo en el que dado un autor devuelve una lista con las publicaciones realizadas.
+		
+		for (String pIdPubli: autores.keySet()) {
+			ArrayList<String> lA = autores.get(pIdPubli);
+			if(lA.contains(a.getId())) {
+				lista.add(publicaciones.get(pIdPubli));
+			}
+		}
 		return lista;
 	}
 	
-	
-	public ArrayList<String> ordenarAlfabeticamente(){
-		ArrayList<String> lista = new ArrayList<>();
-		//TODO Hacer este método en el que se ordena alfabeticamente con algoritmo de ordenación.
+	public ArrayList<Publicacion> ordenarAlfabeticamente(){
+		ArrayList<Publicacion> lista = new ArrayList<>();
+		for(Publicacion publi: publicaciones.values()) {
+			if(lista.size()==0) {
+				lista.add(publi);
+			} else {
+				int posInicial=0, posFinal=lista.size()-1, posMitad=0;
+				boolean enc=false;
+				while(posInicial<=posFinal && !enc) {
+					posMitad = (posInicial+posFinal)/2;
+					Publicacion p = lista.get(posMitad);
+					if(p.getId().compareTo(publi.getId())<0) {
+						posInicial = posMitad + 1;
+					}else {
+						if(posMitad==0 || lista.get(posMitad - 1).getId().compareTo(publi.getId())<0) {
+							enc = true;
+						}else {
+							posFinal = posMitad - 1;
+						}
+					}
+				}
+				if(!enc) {
+					lista.add(publi);
+				}else {
+					lista.add(posMitad,publi);
+				}
+			}
+		}
 		return lista;
 	}
 	
+	public HashMap<String, Publicacion> getPublicaciones() {
+		return publicaciones;
+	}
+	
+	public HashMap<String, ArrayList<String>> getCitas() {
+		return citas;
+	}
 	public void loadCitas(String nom) {
 		try {
 			PrintWriter salida = new PrintWriter(new File(nom));

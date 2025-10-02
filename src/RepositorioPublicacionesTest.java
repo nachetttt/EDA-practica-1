@@ -1,0 +1,112 @@
+import java.util.ArrayList;
+
+import junit.framework.TestCase;
+
+public class RepositorioPublicacionesTest extends TestCase {
+		
+	private RepositorioPublicaciones rP;
+	private Publicacion p1,p2,p3;
+	private ArrayList<Publicacion> lista;
+	
+	protected void setUp() throws Exception {
+		rP = new RepositorioPublicaciones();
+		p1 = new Publicacion("P1", "Publi1");
+		p2 = new Publicacion("P2", "Publi2");
+		p3 = new Publicacion("P3", "Publi3");
+		lista = new ArrayList<Publicacion>();
+	}
+
+	protected void tearDown() throws Exception {
+		rP = null;
+	}
+
+	public void testReadCitas() {
+		//TODO hacer este test llamando a read.citas
+	}
+
+	public void testReadAutores() {
+		//TODO hacer este test
+	}
+
+	public void testReadPublicaciones() {
+		//TODO hacer este test
+	}
+
+	public void testBuscarPubliPorId() {
+		
+		rP.getPublicaciones().put("P1", p1);
+		rP.getPublicaciones().put("P2", p2);
+		rP.getPublicaciones().put("P3", p3);
+		
+		Publicacion buscar1 = rP.buscarPubliPorId("P1");
+		assertEquals("P1", buscar1.getId());
+		assertEquals("Publi1", buscar1.getTítulo());
+		
+		Publicacion buscar2 = rP.buscarPubliPorId("P2");
+		assertEquals("P2", buscar2.getId());
+		assertEquals("Publi2", buscar2.getTítulo());
+
+	}
+
+	public void testInsertarPubli() {
+		rP.getPublicaciones().put("P1", p1);
+		assertTrue(rP.getPublicaciones().size()==1);
+	}
+
+	public void testAnadirCitaAPubli() {
+		fail("Not yet implemented");
+	}
+
+	public void testAnadirAutorAPubli() {
+		fail("Not yet implemented");
+	}
+
+	public void testEliminarPubli() {
+		rP.getPublicaciones().put("P1", p1);
+		rP.getPublicaciones().put("P2", p2);
+		assertTrue(rP.getPublicaciones().size()==2);	
+		rP.eliminarPubli("P2");
+		assertFalse(rP.getPublicaciones().containsKey("P2"));
+		assertTrue(rP.getPublicaciones().size()==1);
+	}
+
+	public void testListaPublisCitadas() {
+		rP.anadirCitaAPubli("P1", "P2");
+		rP.anadirCitaAPubli("P1", "P3");
+		rP.anadirCitaAPubli("P1", "P3");
+		rP.anadirCitaAPubli("P1", "P4");
+		rP.anadirCitaAPubli("P1", "P5");
+		rP.anadirCitaAPubli("P8", "P5");
+		lista = rP.listaPublisCitadas("P1");
+		assertTrue(lista.size()==5);
+		
+		rP.getCitas().get("P1").remove(4);
+		lista = rP.listaPublisCitadas("P1");
+		assertEquals(4,lista.size());
+		
+	}
+	public void testListaAutoresPubli() {
+		
+	}
+
+	public void testListaPublicacionesAutor() {
+		fail("Not yet implemented");
+	}
+
+	public void testOrdenarAlfabeticamente() {
+		fail("Not yet implemented");
+	}
+
+	public void testLoadCitas() {
+		fail("Not yet implemented");
+	}
+
+	public void testLoadAutores() {
+		fail("Not yet implemented");
+	}
+
+	public void testLoadPublicaciones() {
+		fail("Not yet implemented");
+	}
+
+}
