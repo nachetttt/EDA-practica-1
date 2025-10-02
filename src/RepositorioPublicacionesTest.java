@@ -40,11 +40,11 @@ public class RepositorioPublicacionesTest extends TestCase {
 		
 		Publicacion buscar1 = rP.buscarPubliPorId("P1");
 		assertEquals("P1", buscar1.getId());
-		assertEquals("Publi1", buscar1.getTítulo());
+		assertEquals("Publi1", buscar1.getTitulo());
 			
 		Publicacion buscar2 = rP.buscarPubliPorId("P2");
 		assertEquals("P2", buscar2.getId());
-		assertEquals("Publi2", buscar2.getTítulo());
+		assertEquals("Publi2", buscar2.getTitulo());
 
 	}
 

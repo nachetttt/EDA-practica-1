@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
 public class RepositorioPublicaciones {
 	
 	private HashMap<String, ArrayList<String>> citas; //ID Publicación # Publi citada
@@ -76,7 +75,7 @@ public class RepositorioPublicaciones {
 		return publi;
 	}
 	
-	public void insertarPubli(String pId, String pTítulo) {
+	public void anadirPubli(String pId, String pTítulo) {
 		Publicacion publi = new Publicacion(pId, pTítulo);
 		publicaciones.put(pId, publi);
 	}
@@ -88,11 +87,11 @@ public class RepositorioPublicaciones {
 		citas.get(pId).add(pCita);
 	}
 	
-	public void anadirAutorAPubli(String pIdPubli, String pNom) {
+	public void anadirAutorAPubli(String pIdPubli, String pIdAutor) {
 		if (!autores.containsKey(pIdPubli)) {
 			autores.put(pIdPubli, new ArrayList<>());
 		}
-		autores.get(pIdPubli).add(pNom);
+		autores.get(pIdPubli).add(pIdAutor);
 	}
 	
 	public void eliminarPubli(String pIdPubli) {
@@ -110,23 +109,21 @@ public class RepositorioPublicaciones {
 	}
 	
 	public ArrayList<String> listaAutoresPubli(Publicacion p) {
-		String pId = p.getId();
-		ArrayList<String> al = autores.get(pId);
-		
-		return al;
+		ArrayList<String> lA = autores.get(p.getId());
+		return lA;
 	}
 	
 	public ArrayList<Publicacion> listaPublicacionesAutor(Autor a){
 		ArrayList<Publicacion> lista = new ArrayList<>();
-		
-		for (String pIdPubli: autores.keySet()) {
+		for(String pIdPubli: autores.keySet()) {
 			ArrayList<String> lA = autores.get(pIdPubli);
-			if(lA.contains(a.getId())) {
+			if(lA.contains(a.getId())){
 				lista.add(publicaciones.get(pIdPubli));
 			}
 		}
 		return lista;
 	}
+	
 	
 	public ArrayList<Publicacion> ordenarAlfabeticamente(){
 		ArrayList<Publicacion> lista = new ArrayList<>();
@@ -159,13 +156,6 @@ public class RepositorioPublicaciones {
 		return lista;
 	}
 	
-	public HashMap<String, Publicacion> getPublicaciones() {
-		return publicaciones;
-	}
-	
-	public HashMap<String, ArrayList<String>> getCitas() {
-		return citas;
-	}
 	public void loadCitas(String nom) {
 		try {
 			PrintWriter salida = new PrintWriter(new File(nom));
@@ -200,12 +190,19 @@ public class RepositorioPublicaciones {
 		try {
 			PrintWriter salida = new PrintWriter(new File(nom));
 			for (String pId: publicaciones.keySet()) {
-				salida.println(pId+" # "+publicaciones.get(pId).getTítulo());
+				salida.println(pId+" # "+publicaciones.get(pId).getTitulo());
 			}
 			salida.flush();
 			salida.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public HashMap<String, Publicacion> getPublicaciones(){
+		return publicaciones;
+	}
+	public HashMap<String, ArrayList<String>> getCitas(){
+		return citas;
 	}
 }

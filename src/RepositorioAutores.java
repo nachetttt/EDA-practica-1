@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class RepositorioAutores {
-	private HashMap<String, Autor> autores;
+	private HashMap<String, Autor> autores; //ID autor # Objeto Autor
 	
 	public RepositorioAutores() {
 		autores = new HashMap<>();
@@ -25,21 +25,21 @@ public class RepositorioAutores {
 				linea = entrada.nextLine();
 				String[] datos = linea.split(" # ");
 				Autor a = new Autor(datos[0],datos[1]);
-				autores.put(datos[0],a);
+				autores.put(datos[0], a);
 			}
 			entrada.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public Autor obtenerAutor(String pId) {
 		return autores.get(pId);
 	}
 	
 	public void eliminarAutor(String pId) {
 		autores.remove(pId);
-		}
+	}
 	
 	public void loadAutores(String nom) {
 		try {

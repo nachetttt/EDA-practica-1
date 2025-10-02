@@ -1,20 +1,18 @@
-
 public class Publicacion {
-	
+
 	private String id;
-	private String título;
+	private String titulo;
 	
 	public Publicacion(String pId, String pNombre) {
 		this.id = pId;
-		this.título = pNombre;
+		this.titulo = pNombre;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public String getTítulo() {
-		return título;
+	public String getTitulo() {
+		return titulo;
 	}
-	
 }

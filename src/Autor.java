@@ -1,4 +1,3 @@
-
 public class Autor {
 	
 	private String id;
@@ -17,6 +16,4 @@ public class Autor {
 	public String getNombre() {
 		return nombre;
 	}
-
-	
 }
