@@ -51,19 +51,11 @@ public class RepositorioPublicacionesTest extends TestCase {
 	}
 
 	public void testBuscarPubliPorId() {
-		
-		rP.getPublicaciones().put("P1", p1);
-		rP.getPublicaciones().put("P2", p2);
-		rP.getPublicaciones().put("P3", p3);
-		
-		Publicacion buscar1 = rP.buscarPubliPorId("P1");
-		assertEquals("P1", buscar1.getId());
-		assertEquals("Publi1", buscar1.getTitulo());
-			
-		Publicacion buscar2 = rP.buscarPubliPorId("P2");
-		assertEquals("P2", buscar2.getId());
-		assertEquals("Publi2", buscar2.getTitulo());
-
+		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
+		//buscar primera publicacion
+		assertEquals(rP.getPublicaciones().get("Q33205611"),rP.buscarPubliPorId("Q33205611"));
+		//buscar ultima publicacion
+		assertEquals(rP.getPublicaciones().get("Q28390663"),rP.buscarPubliPorId("Q28390663"));
 	}
 
 	public void testInsertarPubli() {
