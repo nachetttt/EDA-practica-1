@@ -99,6 +99,11 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.eliminarPubli("Q33205611");
 		assertFalse(rP.getPublicaciones().containsKey("Q33205611"));
 		assertEquals((size-1),rP.getPublicaciones().size());
+		
+		int sizeAntes = rP.getPublicaciones().size();
+		rP.eliminarPubli("38573");
+		int sizeDespues = rP.getPublicaciones().size();
+		assertTrue(sizeAntes==sizeDespues);
 	}
 
 	public void testListaPublisCitadas() {
