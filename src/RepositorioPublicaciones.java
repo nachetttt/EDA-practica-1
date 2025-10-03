@@ -77,7 +77,7 @@ public class RepositorioPublicaciones {
 		return publi;
 	}
 	
-	public void anadirPubli(String pId, String pTítulo) {
+	public void insertarPubli(String pId, String pTítulo) {
 		Publicacion publi = new Publicacion(pId, pTítulo);
 		publicaciones.put(pId, publi);
 	}
