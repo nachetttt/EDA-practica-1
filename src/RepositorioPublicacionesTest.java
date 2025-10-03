@@ -65,7 +65,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 	public void testInsertarPubli() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
 		int size = rP.getPublicaciones().size();
-		rP.getPublicaciones().put("P1", p1);
+		rP.insertarPubli("P1", "Publi1");
 		assertTrue(rP.getPublicaciones().size()==size+1);
 	}
 
