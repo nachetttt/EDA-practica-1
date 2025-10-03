@@ -46,7 +46,9 @@ public class RepositorioPublicaciones {
 				if (!autores.containsKey(datos[0])) {
 					autores.put(datos[0], new ArrayList<>());
 				}
-				autores.get(datos[0]).add(datos[1]);
+				if(datos.length == 2) {
+					autores.get(datos[0]).add(datos[1]);
+				}
 			}
 			entrada.close();
 		}catch (IOException e) {
@@ -198,11 +200,14 @@ public class RepositorioPublicaciones {
 			e.printStackTrace();
 		}
 	}
-	
 	public HashMap<String, Publicacion> getPublicaciones(){
 		return publicaciones;
 	}
 	public HashMap<String, ArrayList<String>> getCitas(){
 		return citas;
+	}
+	
+	public HashMap<String, ArrayList<String>> getAutores(){
+		return autores;
 	}
 }
