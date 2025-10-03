@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 import junit.framework.TestCase;
 
 public class RepositorioAutoresTest extends TestCase {
@@ -16,34 +14,38 @@ public class RepositorioAutoresTest extends TestCase {
 	}
 
 	public void testAnadirAutor() {
-		rA.anadirAutor("A1", "Pablo");
-		assertTrue(rA.getRepositorioAutores().containsKey("A1"));
-		
+		rA.readAutores("Datuak/Datuak/authors-name-all.txt");
+		int size = rA.getRepositorioAutores().size();
+		rA.anadirAutor("Q29349238", "Pablo");
+		assertTrue(rA.getRepositorioAutores().containsKey("Q29349238"));
+		assertEquals((size+1), rA.getRepositorioAutores().size());
+		//se podría probar a añadir un autor vacío?
+
 	}
 
 	public void testReadAutores() {
-		fail("Not yet implemented");
-		//TODO Hacer este test
+		rA.readAutores("Datuak/Datuak/authors-name-all.txt");
+		assertNotNull(rA.getRepositorioAutores());
+		assertEquals("Kevin Thiele", rA.getRepositorioAutores().get("Q547084").getNombre());
+		assertEquals("Eric Waclawik", rA.getRepositorioAutores().get("Q60320741").getNombre());
 	}
 
 	public void testObtenerAutor() {
-		rA.anadirAutor("A1", "Pablo");
-		Autor a = rA.obtenerAutor("A1");
-		assertEquals("A1", a.getId());
-		assertEquals("Pablo", a.getNombre());
+		rA.anadirAutor("Q92389428", "Charles");
+		Autor a = rA.obtenerAutor("Q92389428");
+		assertEquals("Q92389428", a.getId());
+		assertEquals("Charles", a.getNombre());
 		assertNotNull(a);
 	}
 
 	public void testEliminarAutor() {
-		rA.anadirAutor("A1", "Pablo");
-		assertTrue(rA.getRepositorioAutores().containsKey("A1"));
-		rA.eliminarAutor("A1");
-		assertFalse(rA.getRepositorioAutores().containsKey("A1"));
+		rA.anadirAutor("Q9238523", "Helsey");
+		assertTrue(rA.getRepositorioAutores().containsKey("Q9238523"));
+		int size = rA.getRepositorioAutores().size();
+		rA.eliminarAutor("Q9238523");
+		assertFalse(rA.getRepositorioAutores().containsKey("Q9238523"));
+		assertTrue(rA.getRepositorioAutores().size()!=size);
 	}
 
-	public void testLoadAutores() {
-		//TODO Hacer este test
-		fail("Not yet implemented");
-	}
 
 }
