@@ -114,6 +114,8 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista.size()==rP.getCitas().get("Q21136163").size());
 		//comprobar que una misma cita la contienen las dos listas
 		assertTrue(lista.contains(rP.buscarPubliPorId(rP.getCitas().get("Q21136163").get(0)))); 
+		//si la clave no existe, devuelve una lista vacia
+		assertTrue(rP.listaPublisCitadas("293748923").size()==0);
 	}
 	
 	public void testListaAutoresPubli() {
