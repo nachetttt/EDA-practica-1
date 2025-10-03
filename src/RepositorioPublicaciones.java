@@ -101,16 +101,15 @@ public class RepositorioPublicaciones {
 	}
 	
 	public ArrayList<Publicacion> listaPublisCitadas(String pId) {
-		public ArrayList<Publicacion> listaPublisCitadas(String pId) {
-			ArrayList<Publicacion> lPC = new ArrayList<>();
-			ArrayList<String> lista = citas.get(pId);
-			if(lista!=null) {
-				for (String i: lista) {
-					Publicacion publi = publicaciones.get(i);
-					lPC.add(publi);
-				}
+		ArrayList<Publicacion> lPC = new ArrayList<>();
+		ArrayList<String> lista = citas.get(pId);
+		if(lista!=null) {
+			for (String i: lista) {
+				Publicacion publi = publicaciones.get(i);
+				lPC.add(publi);
 			}
-			return lPC;
+		}
+		return lPC;
 	}
 	
 	public ArrayList<String> listaAutoresPubli(Publicacion p) {
