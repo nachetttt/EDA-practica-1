@@ -119,7 +119,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista2.contains(rP.getAutores().get("Q101088249").get(0)));
 	}
 
-		public void testListaPublicacionesAutor() {
+	public void testListaPublicacionesAutor() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
 		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
 		lista = rP.listaPublicacionesAutor(a1);
