@@ -119,10 +119,12 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista2.contains(rP.getAutores().get("Q101088249").get(0)));
 	}
 
-	public void testListaPublicacionesAutor() {
+		public void testListaPublicacionesAutor() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
 		rP.readAutores("Datuak/Datuak/publications-authors-all-final.txt");
-		//TODO terminar esta mierda me he raiau, chau.
+		lista = rP.listaPublicacionesAutor(a1);
+		Publicacion p = rP.buscarPubliPorId("Q38395106");
+		assertTrue(lista.contains(p));	
 	}
 
 	public void testOrdenarAlfabeticamente() {
