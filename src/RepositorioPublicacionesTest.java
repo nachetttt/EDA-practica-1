@@ -59,6 +59,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertEquals(rP.getPublicaciones().get("Q33205611"),rP.buscarPubliPorId("Q33205611"));
 		//buscar ultima publicacion
 		assertEquals(rP.getPublicaciones().get("Q28390663"),rP.buscarPubliPorId("Q28390663"));
+		assertFalse(rP.getPublicaciones().containsKey("293472"));
 	}
 
 	public void testInsertarPubli() {
