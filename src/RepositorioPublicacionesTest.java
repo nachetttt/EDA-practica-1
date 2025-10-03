@@ -19,6 +19,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		p3 = new Publicacion("P3", "Publi3");
 		lista = new ArrayList<Publicacion>();
 		lista2 = new ArrayList<String>();
+		a1 = new Autor("Q47372720", "Andrew J. Stewart");
 	}
 
 	protected void tearDown() throws Exception {
