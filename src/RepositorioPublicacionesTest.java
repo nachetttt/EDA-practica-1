@@ -126,6 +126,8 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista2.size()==rP.getAutores().get("Q101088249").size());
 		//comprobar que una misma cita la contienen las dos listas
 		assertTrue(lista2.contains(rP.getAutores().get("Q101088249").get(0)));
+		//utilizar una publicación que no existe en el mapa.
+		assertNull(rP.listaAutoresPubli(p1));
 	}
 
 	public void testListaPublicacionesAutor() {
