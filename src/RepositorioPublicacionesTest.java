@@ -11,6 +11,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 	private Publicacion p1,p2,p3;
 	private ArrayList<Publicacion> lista;
 	private ArrayList<String> lista2;
+	private Autor a1,a2;
 	
 	protected void setUp() throws Exception {
 		rP = new RepositorioPublicaciones();
@@ -20,6 +21,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		lista = new ArrayList<Publicacion>();
 		lista2 = new ArrayList<String>();
 		a1 = new Autor("Q47372720", "Andrew J. Stewart");
+		a2 = new Autor("Q348923572", "Alberto");
 	}
 
 	protected void tearDown() throws Exception {
@@ -128,6 +130,8 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista2.contains(rP.getAutores().get("Q101088249").get(0)));
 		//utilizar una publicación que no existe en el mapa.
 		assertNull(rP.listaAutoresPubli(p1));
+		//utilizar un autor que no existe en el mapa.
+		assertTrue(rP.listaPublicacionesAutor(a2).size()==0);
 	}
 
 	public void testListaPublicacionesAutor() {
