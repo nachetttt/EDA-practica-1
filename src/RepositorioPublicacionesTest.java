@@ -69,6 +69,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		int size = rP.getPublicaciones().size();
 		rP.insertarPubli("P1", "Publi1");
 		assertTrue(rP.getPublicaciones().size()==size+1);
+		rP.loadPublicaciones("Datuak/Datuak/JUnit loadPublis.txt");
 	}
 
 	public void testAnadirCitaAPubli() {
@@ -81,6 +82,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.anadirCitaAPubli(p1.getId(),"Q21562621");
 		assertTrue(rP.getCitas().containsKey(p1.getId()));
 		assertEquals("Q21562621",rP.getCitas().get(p1.getId()).get(0));
+		rP.loadCitas("Datuak/Datuak/JUnit loadCitas.txt");
 	}
 
 	public void testAnadirAutorAPubli() {
@@ -93,6 +95,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.anadirAutorAPubli(p1.getId(), "Q448592");
 		assertTrue(rP.getAutores().containsKey(p1.getId()));
 		assertEquals("Q448592",rP.getAutores().get(p1.getId()).get(0));
+		rP.loadAutores("Datuak/Datuak/JUnit loadAutores.txt");
 	}
 
 	public void testEliminarPubli() {
@@ -106,7 +109,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.eliminarPubli("38573");
 		int sizeDespues = rP.getPublicaciones().size();
 		assertTrue(sizeAntes==sizeDespues);
-	}
+		rP.loadPublicaciones("Datuak/Datuak/JUnit loadPublis.txt");
 
 	public void testListaPublisCitadas() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
