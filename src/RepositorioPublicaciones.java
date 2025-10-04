@@ -117,17 +117,18 @@ public class RepositorioPublicaciones {
 		return lA;
 	}
 	
-	public ArrayList<Publicacion> listaPublicacionesAutor(Autor a){
+public ArrayList<Publicacion> listaPublicacionesAutor(Autor a){
 		ArrayList<Publicacion> lista = new ArrayList<>();
 		for(String pIdPubli: autores.keySet()) {
-			ArrayList<String> lA = autores.get(pIdPubli);
-			if(lA.contains(a.getId())){
-				lista.add(publicaciones.get(pIdPubli));
+			if (autores.get(pIdPubli)!=null) {
+				ArrayList<String> lA = autores.get(pIdPubli);
+				if(lA.contains(a.getId())){
+					lista.add(publicaciones.get(pIdPubli));
+				}
 			}
 		}
 		return lista;
 	}
-	
 	
 	public ArrayList<Publicacion> ordenarAlfabeticamente(){
 		ArrayList<Publicacion> lista = new ArrayList<>();
