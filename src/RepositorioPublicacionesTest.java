@@ -64,10 +64,10 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertFalse(rP.getPublicaciones().containsKey("293472"));
 	}
 
-	public void testInsertarPubli() {
+	public void testAnadirPubli() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
 		int size = rP.getPublicaciones().size();
-		rP.insertarPubli("P1", "Publi1");
+		rP.anadirPubli("P1", "TITULO");
 		assertTrue(rP.getPublicaciones().size()==size+1);
 		rP.loadPublicaciones("Datuak/Datuak/JUnit loadPublis.txt");
 	}
