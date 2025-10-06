@@ -1,5 +1,4 @@
 package labo1;
-
 import java.util.ArrayList;
 
 public class Main {
@@ -17,12 +16,13 @@ public class Main {
 		
 		//Load Autores
 		milisInicio = System.currentTimeMillis();
-		ra.loadAutores("Datuak/Datuak/JUnit ");
+		ra.loadAutores("Datuak/Datuak/JUnit loadAutores 2.txt");
 		milisFin = System.currentTimeMillis();
 		System.out.println("LoadAutores: "+((milisFin-milisInicio)/1000)+" segundos");
 		
 		System.out.println(" ");
 		System.out.println("Repositorio Publicaciones");
+
 		//Leer Citas
 		milisInicio = System.currentTimeMillis();
 		RepositorioPublicaciones rp = new RepositorioPublicaciones();
@@ -72,5 +72,25 @@ public class Main {
 		rp.ordenarAlfabeticamente();
 		milisFin = System.currentTimeMillis();
 		System.out.println("OrdenarAlfabeticamente: "+((milisFin-milisInicio)/1000)+" segundos");
+		
+		//Load Autores
+		milisInicio = System.currentTimeMillis();
+		rp.loadAutores("Datuak/Datuak/JUnit loadAutores.txt");
+		milisFin = System.currentTimeMillis();
+		System.out.println("LoadAutores: "+((milisFin-milisInicio)/1000)+" segundos");
+		
+		//Load Publicaciones
+		milisInicio = System.currentTimeMillis();
+		rp.loadPublicaciones("Datuak/Datuak/JUnit loadPublis.txt");
+		milisFin = System.currentTimeMillis();
+		System.out.println("LoadPublicaciones: "+((milisFin-milisInicio)/1000)+" segundos");
+		
+		//Load Citas
+		milisInicio = System.currentTimeMillis();
+		rp.loadCitas("Datuak/Datuak/JUnit loadCitas.txt");
+		milisFin = System.currentTimeMillis();
+		System.out.println("LoadCitas: "+((milisFin-milisInicio)/1000)+" segundos");
+		
 	}
+
 }
