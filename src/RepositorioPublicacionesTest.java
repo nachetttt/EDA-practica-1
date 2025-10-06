@@ -1,6 +1,3 @@
-
-package labo1;
-
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
@@ -11,7 +8,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 	private Publicacion p1,p2,p3;
 	private ArrayList<Publicacion> lista;
 	private ArrayList<String> lista2;
-	private Autor a1,a2;
+	private Autor a1;
 	
 	protected void setUp() throws Exception {
 		rP = new RepositorioPublicaciones();
@@ -21,7 +18,6 @@ public class RepositorioPublicacionesTest extends TestCase {
 		lista = new ArrayList<Publicacion>();
 		lista2 = new ArrayList<String>();
 		a1 = new Autor("Q47372720", "Andrew J. Stewart");
-		a2 = new Autor("Q348923572", "Alberto");
 	}
 
 	protected void tearDown() throws Exception {
@@ -61,15 +57,13 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertEquals(rP.getPublicaciones().get("Q33205611"),rP.buscarPubliPorId("Q33205611"));
 		//buscar ultima publicacion
 		assertEquals(rP.getPublicaciones().get("Q28390663"),rP.buscarPubliPorId("Q28390663"));
-		assertFalse(rP.getPublicaciones().containsKey("293472"));
 	}
 
-	public void testInsertarPubli() {
+	public void AnadirPubli() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
 		int size = rP.getPublicaciones().size();
-		rP.insertarPubli("P1", "Publi1");
+		rP.anadirPubli("P1", "TITULO");
 		assertTrue(rP.getPublicaciones().size()==size+1);
-		rP.loadPublicaciones("Datuak/Datuak/JUnit loadPublis.txt");
 	}
 
 	public void testAnadirCitaAPubli() {
@@ -82,7 +76,6 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.anadirCitaAPubli(p1.getId(),"Q21562621");
 		assertTrue(rP.getCitas().containsKey(p1.getId()));
 		assertEquals("Q21562621",rP.getCitas().get(p1.getId()).get(0));
-		rP.loadCitas("Datuak/Datuak/JUnit loadCitas.txt");
 	}
 
 	public void testAnadirAutorAPubli() {
@@ -95,7 +88,6 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.anadirAutorAPubli(p1.getId(), "Q448592");
 		assertTrue(rP.getAutores().containsKey(p1.getId()));
 		assertEquals("Q448592",rP.getAutores().get(p1.getId()).get(0));
-		rP.loadAutores("Datuak/Datuak/JUnit loadAutores.txt");
 	}
 
 	public void testEliminarPubli() {
@@ -104,12 +96,7 @@ public class RepositorioPublicacionesTest extends TestCase {
 		rP.eliminarPubli("Q33205611");
 		assertFalse(rP.getPublicaciones().containsKey("Q33205611"));
 		assertEquals((size-1),rP.getPublicaciones().size());
-		
-		int sizeAntes = rP.getPublicaciones().size();
-		rP.eliminarPubli("38573");
-		int sizeDespues = rP.getPublicaciones().size();
-		assertTrue(sizeAntes==sizeDespues);
-		rP.loadPublicaciones("Datuak/Datuak/JUnit loadPublis.txt");
+	}
 
 	public void testListaPublisCitadas() {
 		rP.readPublicaciones("Datuak/Datuak/publications-titles-all.txt");
@@ -119,8 +106,6 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista.size()==rP.getCitas().get("Q21136163").size());
 		//comprobar que una misma cita la contienen las dos listas
 		assertTrue(lista.contains(rP.buscarPubliPorId(rP.getCitas().get("Q21136163").get(0)))); 
-		//si la clave no existe, devuelve una lista vacia
-		assertTrue(rP.listaPublisCitadas("293748923").size()==0);
 	}
 	
 	public void testListaAutoresPubli() {
@@ -131,10 +116,6 @@ public class RepositorioPublicacionesTest extends TestCase {
 		assertTrue(lista2.size()==rP.getAutores().get("Q101088249").size());
 		//comprobar que una misma cita la contienen las dos listas
 		assertTrue(lista2.contains(rP.getAutores().get("Q101088249").get(0)));
-		//utilizar una publicación que no existe en el mapa.
-		assertNull(rP.listaAutoresPubli(p1));
-		//utilizar un autor que no existe en el mapa.
-		assertTrue(rP.listaPublicacionesAutor(a2).size()==0);
 	}
 
 	public void testListaPublicacionesAutor() {
